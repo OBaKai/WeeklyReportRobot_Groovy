@@ -9,6 +9,9 @@ class AutoSendRebot {
     static def USER_FILE_NAME = "UserInfo.xml"
     static def WEEKLY_REPORT_FILE_NAME = "WeeklyReport.xml"
 
+    //轮询间隔时间
+    private static def keed_in_check_interval = 10 * 60 * 1000
+
     /**
      * 入口方法
      * @param args
@@ -132,22 +135,22 @@ class AutoSendRebot {
                 }
 
                 def date = new Date()
-                def dateInfo = date.toString().split(" ")
-                def weekInfo = dateInfo[0] //当前星期几
-                def timeInfo = dateInfo[3].split(":")[0] //当前时间 (小时)
+                def currentDate = date.toString().split(" ")
+                def currentWeek = currentDate[0] //当前星期几
+                def currentTime = currentDate[3].replace(":", "").substring(0, 4)
 
                 def targetWeek = Utils.weekChange(userInfoLoader?.getAutoSendWeek())
-                def targetTime = userInfoLoader?.getAutoSendTime().toString().split(":")[0]
-                println("weekInfo= $weekInfo, timeInfo= $timeInfo, targetWeek=$targetWeek, targetTime=$targetTime")
+                def targetTime = userInfoLoader?.getAutoSendTime().toString().replace(":", "")
+                println("currentWeek= $currentWeek, currentTime= $currentTime, targetWeek=$targetWeek, targetTime=$targetTime")
 
-                if (weekInfo == targetWeek){ //星期几校验
-                    if (timeInfo == targetTime){ //发送时间校验
+                if (currentWeek == targetWeek){ //星期几校验
+                    if (currentTime >= targetTime && currentTime <= Utils.jointTime(targetTime, 15)){ //发送时间校验
                         is_In_Legal_Tiem = true
                     }else {
-                        println("检验星期成功, 时间未到继续轮询")
+                        println("检验星期成功, 未到发送邮件时间继续轮询, 每${keed_in_check_interval}ms轮询一次")
                     }
                 }else { //今天不是有效星期, 返回不做轮询
-                    println("检验星期失败, 退出轮询")
+                    println("校验星期失败, 退出轮询")
                     break
                 }
 
@@ -156,7 +159,7 @@ class AutoSendRebot {
                     executeSendEmail()
                 }
 
-                Thread.sleep(10 * 60 * 1000)
+                Thread.sleep(keed_in_check_interval)
             }
         }
     }

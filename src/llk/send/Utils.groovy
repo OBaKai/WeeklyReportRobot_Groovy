@@ -11,7 +11,8 @@ class Utils {
             '星期四' : 'Thu',
             '星期五' : 'Fri',
             '星期六' : 'Sat',
-            '星期天' : 'Sun'
+            '星期天' : 'Sun',
+            '星期日' : 'Sun'
     ]
 
     static def weekChange(def w){
@@ -75,5 +76,36 @@ class Utils {
     static def currentDateAndTime(){
         def df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
         return df.format(new Date())
+    }
+
+    /**
+     * 拼接分钟
+     * time : 1444 == 14:44
+     * jointTime : 20 -> 拼接到1444后变成 15:04
+     */
+    static def jointTime(def time, def jointTime) {
+        def returnValue = time
+
+        def hour = time?.toString().substring(0, 2)
+        def minute = time?.toString().substring(2, 4)
+
+        if (!hour || !minute) return returnValue
+
+        if (jointTime >= 60) return returnValue
+
+        def joint_minute = minute.toInteger() + jointTime.toInteger()
+        if (joint_minute < 60){
+            returnValue =  "${hour}${joint_minute}"
+        } else {
+            if (joint_minute == 60){
+                returnValue = "${hour.toInteger() + 1}00"
+            }else {
+                def m = (joint_minute - 60) < 10 ? "0${joint_minute - 60}" : "${joint_minute - 60}"
+                returnValue = "${hour.toInteger() + 1}$m"
+            }
+        }
+
+        //println("jointTime方法, 参数time=$time 参数jointTime=$jointTime, 返回值returnValue=$returnValue")
+        return returnValue
     }
 }
