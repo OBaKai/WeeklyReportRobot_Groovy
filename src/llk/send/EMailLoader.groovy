@@ -83,7 +83,7 @@ class EMailLoader {
                     progress(name:'一、本周项目进度', isWriteNull ? "" : emailContent[0])
                     plan(name:'二、下周计划', isWriteNull ? "" : emailContent[1])
                     risk(name:'三、风险点', isWriteNull ? "" : emailContent[2])
-                    bug(name:'四、tapd遗留bug', isWriteNull ? "" : emailContent[3])
+                    bug(name:'四、遗留bug', isWriteNull ? "" : emailContent[3])
                 }
             }
 

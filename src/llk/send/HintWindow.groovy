@@ -43,7 +43,7 @@ class HintWindow {
             riskLabel = new JLabel("风险点:")
             riskLabel.setBounds(50, 290, 500, 15)
 
-            bugLabel = new JLabel("tapd遗留bug:")
+            bugLabel = new JLabel("遗留bug:")
             bugLabel.setBounds(50, 420, 500, 15)
 
             projectTextArea = new JTextArea()
