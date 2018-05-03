@@ -31,7 +31,7 @@
       ③ UserInfo.xml用户信息(必须要填写完整)
           <user>
             <username></username> //用户账号
-            <password></password> //用户密码
+            <password></password> //用户密码 (foxmail动态密码获取问题, 详情请看'三、Foxmail邮箱配置以及密码获取')
             <yourname></yourname> //姓名 这个姓名是用在邮件主题的
             <from_address></from_address> //发件人 只能填一个
             <to_address></to_address> //收件人 只能填一个
@@ -54,4 +54,23 @@
             </bug>
           </content>
         </email>
+        
+    三、Foxmail邮箱配置以及密码获取
+      1.第三方登录foxmail需要开启相关服务
+        需要在 设置->账号->POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务
+        POP3/SMTP服务 (如何使用 Foxmail 等软件收发邮件？)     已关闭 |  开启
+        IMAP/SMTP服务 (什么是 IMAP，它又是如何设置？)         已关闭 |  开启
+        
+      2. Foxmail获取动态密码
+        1步骤开启了POP3/SMTP服务 IMAP/SMTP服务之后,
+        会显示 '温馨提示：在第三方登录QQ邮箱，可能存在邮件泄露风险，甚至危害Apple ID安全，建议使用QQ邮箱手机版登录。 
+             继续获取授权码登录第三方客户端邮箱 。 生成授权码'
+        点击 '生成授权码' 即可
+        
+    四、jar运行出错问题
+       1. Exception in thread "main" java.lang.SecurityException: Invalid signature file digest for Manifest main attributes
+       解决方法：打开META-INF目录，将*.SF,*.DSA,*.RSA文件删除掉就可以了。
+       问题原因：https://blog.csdn.net/dai451954706/article/details/50086295
+        
+    
         
