@@ -78,7 +78,7 @@ class EMailLoader {
             def xmlMark  = new groovy.xml.MarkupBuilder(strXml)
             xmlMark.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
             xmlMark.email(){
-                subject(name:'邮件主题', isWriteNull ? "" : '@yourname @m月第@w周周报 (周报机器人自动发送)')
+                subject(name:'邮件主题', '@yourname @m月第@w周周报 (周报机器人自动发送)')
                 content(name:'邮件内容'){
                     progress(name:'一、本周项目进度', isWriteNull ? "" : emailContent[0])
                     plan(name:'二、下周计划', isWriteNull ? "" : emailContent[1])
