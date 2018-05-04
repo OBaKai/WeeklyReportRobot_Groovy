@@ -62,7 +62,7 @@ class EMailSend {
                     println("again send Email, fail_index=$fail_index")
                     sendEMailToFoxmail(UserInfoLoader.getFromAddress(),
                             UserInfoLoader.getToAddress(),
-                            UserInfoLoader.getCCAddress().toString().indexOf(",") != -1 ? UserInfoLoader.getCCAddress().toString().split(",") : UserInfoLoader.getCCAddress(),
+                            UserInfoLoader.getCCAddress().toString().indexOf("、") != -1 ? UserInfoLoader.getCCAddress().toString().split("、") : UserInfoLoader.getCCAddress(),
                             EMailLoader.getEmailSubject(),
                             EMailLoader.getEmailContent())
                     fail_index++

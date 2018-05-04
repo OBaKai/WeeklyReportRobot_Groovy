@@ -108,4 +108,23 @@ class Utils {
         //println("jointTime方法, 参数time=$time 参数jointTime=$jointTime, 返回值returnValue=$returnValue")
         return returnValue
     }
+
+    /**
+     * 对齐分钟
+     * 当前1125 目标1700
+     * 因为轮询时间是10分钟
+     * 所以这里只要有一次轮询的时间 是5跟0的差值就能对齐了
+     *
+     * todo 轮询时间变更的话，这个方法需要修改逻辑
+     */
+    static def alignAtMinute(def current_time, def target_Time) {
+        def c_minute = current_time?.toString().substring(3, 4)
+        def t_minute = target_Time?.toString().substring(3, 4)
+
+        if (!c_minute || !t_minute) return [false, 10]
+
+        if (c_minute == t_minute) return [false, 10]
+
+        return [true, Math.abs(c_minute.toInteger() - t_minute.toInteger())]
+    }
 }

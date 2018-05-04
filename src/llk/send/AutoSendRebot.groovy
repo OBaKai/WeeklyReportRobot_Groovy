@@ -123,6 +123,7 @@ class AutoSendRebot {
     static def checkLegalTiem(){
         Thread.start {
             def is_In_Legal_Tiem = false
+            def is_show_hint = false
 
             while (!is_In_Legal_Tiem){
                 //检验本地工作区
@@ -148,6 +149,10 @@ class AutoSendRebot {
                         is_In_Legal_Tiem = true
                     }else {
                         println("检验星期成功, 未到发送邮件时间继续轮询, 每${keed_in_check_interval}ms轮询一次")
+                        if (!is_show_hint){
+                            new HintWindow().showDialog("今天是${userInfoLoader?.getAutoSendWeek()}啦, 周报机器人会在${userInfoLoader?.getAutoSendTime()}左右为你发周报", false)
+                            is_show_hint = true
+                        }
                     }
                 }else { //今天不是有效星期, 返回不做轮询
                     println("校验星期失败, 退出轮询")
@@ -159,7 +164,13 @@ class AutoSendRebot {
                     executeSendEmail()
                 }
 
-                Thread.sleep(keed_in_check_interval)
+                if (Utils.alignAtMinute(currentTime, targetTime)[0]){
+                    long sleep_time = Utils.alignAtMinute(currentTime, targetTime)[1] * 60 * 1000
+                    println("当前时间需要对齐目标时间, 本次sleep时间为${sleep_time}ms")
+                    Thread.sleep(sleep_time)
+                }else {
+                    Thread.sleep(keed_in_check_interval)
+                }
             }
         }
     }
@@ -177,7 +188,7 @@ class AutoSendRebot {
                 //？== 判空
                 emailSend?.sendEMailToFoxmail(userInfoLoader.getFromAddress(),
                         userInfoLoader.getToAddress(),
-                        userInfoLoader.getCCAddress().toString().indexOf(",") != -1 ? userInfoLoader.getCCAddress().toString().split(",") : userInfoLoader.getCCAddress(),
+                        userInfoLoader.getCCAddress().toString().indexOf("、") != -1 ? userInfoLoader.getCCAddress().toString().split("、") : userInfoLoader.getCCAddress(),
                         email_datas[0],
                         email_datas[1],
                         userInfoLoader)
