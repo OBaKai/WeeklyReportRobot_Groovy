@@ -33,7 +33,6 @@
             <username></username> //用户账号
             <password></password> //用户密码 (foxmail动态密码获取问题, 详情请看'三、Foxmail邮箱配置以及密码获取')
             <yourname></yourname> //姓名 这个姓名是用在邮件主题的
-            <from_address></from_address> //发件人 只能填一个
             <to_address></to_address> //收件人 只能填一个
             <cc_address></cc_address> //抄送人 例如：xxx@qq.com、xxx@qq.com (多联系人要用'、'隔开)
             <auto_send_week></auto_send_week> //星期几发送 例如 星期五 (星期一到星期天)
