@@ -57,9 +57,7 @@ class EMailLoader {
 
                 println("email_subject=" + email_subject)
                 println("email_content=" + email_content)
-                if (loadEmailFinish != null){
-                    loadEmailFinish.call([email_subject, email_content])
-                }
+                loadEmailFinish?.call([email_subject, email_content])
             }
         }else { //文件修改日期 比 最后发送日期要小
             println("文件修改日期与实际不符")

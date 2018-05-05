@@ -186,8 +186,7 @@ class AutoSendRebot {
         def loadEmailFinish = {
             email_datas ->
                 //？== 判空
-                emailSend?.sendEMailToFoxmail(userInfoLoader.getFromAddress(),
-                        userInfoLoader.getToAddress(),
+                emailSend?.sendEMailToFoxmail(userInfoLoader.getToAddress(),
                         userInfoLoader.getCCAddress().toString().indexOf("、") != -1 ? userInfoLoader.getCCAddress().toString().split("、") : userInfoLoader.getCCAddress(),
                         email_datas[0],
                         email_datas[1],
