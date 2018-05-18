@@ -32,7 +32,7 @@ class UserInfoLoader {
 
         def strXml = new StringWriter()
         def xmlMark  = new groovy.xml.MarkupBuilder(strXml)
-        xmlMark.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
+        xmlMark.mkp.xmlDeclaration(version: "1.0", encoding: "GBK")
         xmlMark.user(){
             username(isWriteNull ? "" : getUserName())
             password(isWriteNull ? "" : getPassword())
