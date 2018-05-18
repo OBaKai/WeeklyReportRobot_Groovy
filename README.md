@@ -70,6 +70,9 @@
        1. Exception in thread "main" java.lang.SecurityException: Invalid signature file digest for Manifest main attributes
        解决方法：打开META-INF目录，将*.SF,*.DSA,*.RSA文件删除掉就可以了。
        问题原因：https://blog.csdn.net/dai451954706/article/details/50086295
-        
+       
+       2. com.sun.org.apache.xerces.internal.impl.io.MalformedByteSequenceException: 1 字节的 UTF-8 序列的字节 1 无效。
+       解决方法：xml文件 <?xml version='1.0' encoding='utf-8'?> encoding改为 GBK
+       问题原因：内容存在中文
     
         
