@@ -72,7 +72,7 @@
        问题原因：https://blog.csdn.net/dai451954706/article/details/50086295
        
        2. com.sun.org.apache.xerces.internal.impl.io.MalformedByteSequenceException: 1 字节的 UTF-8 序列的字节 1 无效。
-       解决方法：xml文件 <?xml version='1.0' encoding='utf-8'?> encoding改为 GBK
-       问题原因：内容存在中文
+       解决方法：如果使用文编编辑器来修改的xml, 需要把保存文本的编码改成utf-8
+       问题原因：文本的编码跟内容编码不一致
     
         
